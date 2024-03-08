@@ -10,7 +10,7 @@ dotenv.config()
 const app = express()
 app.use(express.json())
 app.use(cors({
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173"], // Allow requests from this origin
     credentials: true
 }))
 app.use(cookieParser())

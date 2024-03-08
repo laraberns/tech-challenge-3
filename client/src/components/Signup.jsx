@@ -20,7 +20,10 @@ const Signup = () => {
         })
             .then(response => {
                 if (response.data.status) {
+                    alert(response.data.message);
                     navigate('/login')
+                }else{
+                    alert(response.data.message);
                 }
             }).catch(error => console.log(error))
     }

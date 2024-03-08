@@ -16,9 +16,10 @@ const ResetPassword = () => {
         })
             .then(response => {
                 if (response.data.status) {
+                    alert(response.data.message);
                     navigate('/login')
                 }
-                console.log(response.data)
+                alert(response.data.message)
             }).catch(error => console.log(error))
     }
     return (

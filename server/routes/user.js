@@ -10,9 +10,14 @@ const router = express.Router()
 router.post("/signup", async (req, res) => {
     const { username, email, password } = req.body
 
-    const user = await User.findOne({ email })
-    if (user) {
-        return res.json({ message: 'Usuário já existe' })
+    const userEmail = await User.findOne({ email })
+    if (userEmail) {
+        return res.json({ message: 'Email já cadastrado' })
+    }
+
+    const userUsername = await User.findOne({ username })
+    if (userUsername) {
+        return res.json({ message: 'Usuário já cadastrado' })
     }
 
     const hashpassword = await bcrypt.hash(password, 10)
@@ -61,6 +66,7 @@ router.post("/forgotPassword", async (req, res) => {
         return res.json({ message: 'Usuário não cadastrado' })
     }
 
+    // Create a JWT token with the user's ID, which will be used for resetting the password
     const token = jwt.sign({ id: user._id }, process.env.KEY, { expiresIn: '5m' })
 
     var transporter = nodemailer.createTransport({
@@ -94,11 +100,15 @@ router.post("/resetPassword/:token", async (req, res) => {
     const { password } = req.body
 
     try {
+        // Verify the token and extract the user ID from the decoded token
         const decoded = await jwt.verify(token, process.env.KEY)
         const id = decoded.id
+
         const hashpassword = await bcrypt.hash(password, 10)
+        // Update the user's password in the database using the user ID
         await User.findByIdAndUpdate({ _id: id }, { password: hashpassword })
         return res.json({ status: true, message: 'Senha atualizada' })
+
     } catch (error) {
         res.json({ message: 'Token invalido' })
     }
@@ -111,7 +121,6 @@ const verifyUser = async (req, res, next) => {
         if (!token) {
             return res.json({ status: false, message: "Sem token" })
         }
-        const decoded = await jwt.verify(token, process.env.KEY)
         next()
     } catch (error) {
         return res.json(error)

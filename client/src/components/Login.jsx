@@ -19,15 +19,18 @@ function Login() {
         })
             .then(response => {
                 if (response.data.status) {
+                    alert(response.data.message);
                     navigate('/')
+                } else {
+                    alert(response.data.message);
                 }
-            }).catch(error => console.log(error))
+            }).catch(error => alert(error))
     }
 
     return (
         <div>
             <form onSubmit={handleSubmit}>
-            
+
                 <label htmlFor="email">Email:</label>
                 <input
                     type="email"

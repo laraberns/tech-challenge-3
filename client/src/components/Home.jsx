@@ -9,7 +9,7 @@ function Home() {
   useEffect(() => {
     axios.get('http://localhost:1999/auth/verify').then(res => {
       if (res.data.status) {
-        console.log('Acesso liberado');
+        alert('Acesso liberado');
       } else {
         navigate('/login')
       }
@@ -19,6 +19,7 @@ function Home() {
   const handleLogout = () => {
     axios.get('http://localhost:1999/auth/logout').then(res => {
       if (res.data.status) {
+        alert('Logout realizado');
         navigate('/login')
       }
     })
