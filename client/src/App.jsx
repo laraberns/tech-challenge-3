@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Signup from "./components/Signup"
-import Login from "./components/Login"
+import Signup from "./components/Auth/Signup"
+import Login from "./components/Auth/Login"
 import Home from "./components/Home"
-import ForgotPassword from "./components/ForgotPassword"
-import ResetPassword from "./components/ResetPassword"
+import ResetPassword from "./components/Auth/ResetPassword"
+import ForgotPassword from "./components/Auth/ForgotPassword"
 
 function App() {
 
