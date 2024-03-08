@@ -45,7 +45,6 @@
 - **Rota de Logout**: Os usuários podem fazer logout, removendo o token dos cookies.
 
 ## Rotas da API (/auth)
-
 - **/signup**: Permite que os usuários se cadastrem. Verifica a existência de usuários com base no e-mail e no nome de usuário. Usa bcrypt para criptografia de senha e salva os dados do usuário no banco de dados MongoDB.
 
 - **/login**: Manipula o login do usuário. Compara o e-mail e a senha fornecidos com as credenciais armazenadas usando bcrypt. Se bem-sucedido, um token JWT com expiração de uma hora é salvo como um cookie.
@@ -57,3 +56,7 @@
 - **/verifyUser**: Rota para verificar se o usuário possui um token válido em seus cookies. Uma rota protegida.
 
 - **/logout**: Rota para logout do usuário. Remove o token dos cookies.
+
+
+## Rotas da API (/movies)
+- **/getAll**: Retorna todos os filmes da API. Para o banco de dados dos filmes, mockei a API para o MongoDB: https://github.com/toedter/movies-demo/blob/master/backend/src/main/resources/static/movie-data/movies-250.json
