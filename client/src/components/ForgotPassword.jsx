@@ -18,6 +18,7 @@ const ForgotPassword = () => {
                     alert("Cheque seu e-mail para nova senha")
                     navigate('/login')
                 }
+                console.log(response.data)
             }).catch(error => console.log(error))
     }
     return (
@@ -34,7 +35,7 @@ const ForgotPassword = () => {
                 <button type="submit">Enviar</button>
 
             </form>
-        </div>
+        </div> 
     )
 }
 
