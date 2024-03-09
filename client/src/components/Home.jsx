@@ -1,6 +1,7 @@
 import { useEffect } from "react"
-import {useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import axios from 'axios'
+import Movies from "./Movies/Movies"
 
 function Home() {
   const navigate = useNavigate()
@@ -8,9 +9,7 @@ function Home() {
   axios.defaults.withCredentials = true
   useEffect(() => {
     axios.get('http://localhost:1999/auth/verify').then(res => {
-      if (res.data.status) {
-        alert('Acesso liberado');
-      } else {
+      if (!res.data.status) {
         navigate('/login')
       }
     })
@@ -26,8 +25,9 @@ function Home() {
   }
 
   return (
-    <div>
-      <button onClick={handleLogout}>Sair</button>
+    <div className="d-flex flex-column align-items-center">
+      <Movies />
+      <button onClick={handleLogout} className="btn btn-danger">Sair</button>
     </div>
   )
 }

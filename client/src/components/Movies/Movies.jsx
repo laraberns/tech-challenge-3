@@ -7,7 +7,7 @@ import SearchBox from "./SearchBox";
 import AddWatched from "./AddWatched";
 import RemoveWatched from "./RemoveWatched";
 
-function Movies() {
+const Movies = () => {
     const [movies, setMovies] = useState([]);
     const [search, setSearch] = useState('');
     const [favourites, setFavourites] = useState([]);

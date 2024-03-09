@@ -5,6 +5,7 @@ import { UserRouter } from './routes/user.js';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { MovieRouter } from './routes/movies.js';
+import { WatchedRouter } from './routes/watchedMovies.js';
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(cookieParser());
 // Use the 'UserRouter' for routes starting with '/auth'
 app.use('/auth', UserRouter);
 app.use('/movies', MovieRouter);
+app.use('/watchedMovies', WatchedRouter);
 
 // Call the function to connect to databases
 connectToDatabases();

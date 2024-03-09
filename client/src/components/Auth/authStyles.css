@@ -1,14 +1,4 @@
-@use postcss-preset-env {
-    stage: 0;
-}
 
-/* config.css */
-
-:root {
-    --baseColor: #606468;
-}
-
-/* helpers/align.css */
 
 .align {
     display: grid;
@@ -22,29 +12,6 @@
     justify-content: center;
     height: 100vh;
     margin-inline: auto;
-}
-
-/* helpers/hidden.css */
-
-.hidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-}
-
-/* helpers/icon.css */
-
-:root {
-    --iconFill: var(--baseColor);
-}
-
-.icons {
-    display: none;
 }
 
 .link-to {
@@ -63,59 +30,6 @@
     inline-size: 1em;
     vertical-align: middle;
 }
-
-/* layout/base.css */
-
-:root {
-    --htmlFontSize: 100%;
-
-    --bodyBackgroundColor: #2c3338;
-    --bodyColor: var(--baseColor);
-    --bodyFontFamily: "Open Sans";
-    --bodyFontFamilyFallback: sans-serif;
-    --bodyFontSize: 0.950rem;
-    --bodyFontWeight: 400;
-    --bodyLineHeight: 1.5;
-}
-
-* {
-    box-sizing: inherit;
-}
-
-html {
-    box-sizing: border-box;
-    font-size: var(--htmlFontSize);
-}
-
-body {
-    background-color: var(--bodyBackgroundColor);
-    color: var(--bodyColor);
-    font-family: var(--bodyFontFamily), var(--bodyFontFamilyFallback);
-    font-size: var(--bodyFontSize);
-    font-weight: var(--bodyFontWeight);
-    line-height: var(--bodyLineHeight);
-    margin: 0;
-    min-block-size: 100vh;
-}
-
-/* modules/anchor.css */
-
-:root {
-    --anchorColor: #eee;
-}
-
-a {
-    color: var(--anchorColor);
-    outline: 0;
-    text-decoration: none;
-}
-
-a:focus,
-a:hover {
-    text-decoration: underline;
-}
-
-/* modules/form.css */
 
 :root {
     --formGap: 0.875rem;
@@ -156,8 +70,6 @@ input[type="submit"] {
 .form__input {
     flex: 1;
 }
-
-/* modules/login.css */
 
 :root {
     --loginBorderRadus: 0.25rem;
@@ -222,12 +134,10 @@ input[type="submit"] {
     background-color: var(--loginSubmitHoverBackgroundColor);
 }
 
-/* modules/text.css */
-
-p {
-    margin-block: 1.5rem;
-}
-
 .text--center {
     text-align: center;
+}
+
+.text--center span{
+    color: #ea4c88;
 }
