@@ -48,10 +48,18 @@ const Movies = () => {
     useEffect(() => {
         getMovieRequests();
         getFavouriteMovies();
-    }, [search, userId]);
+    }, [search]);
 
 
     const addFavouriteMovie = async (movie) => {
+        // Check if the movie is already in the favourites list
+        const isAlreadyAdded = favourites.some((favourite) => favourite.imdbID === movie.imdbID);
+    
+        if (isAlreadyAdded) {
+            console.warn('This movie is already in your watched list.');
+            return;
+        }
+    
         const newFavouriteList = [...favourites, movie];
         setFavourites(newFavouriteList);
     
@@ -70,25 +78,23 @@ const Movies = () => {
         });
     };
     
-    const RemoveFavouriteMovie = (movie) => {
-        const newFavouriteList = favourites.filter((favourite) => favourite.imdbID !== movie.imdbID);
-        setFavourites(newFavouriteList);
-    
-        // Modifique o corpo da requisição para incluir foto e nome do filme
-        fetch('http://localhost:1999/watchedMovies/remove', {
-            method: 'POST',
+
+    const RemoveFavouriteMovie = async (movie) => {
+        const newFavouriteList = favourites.filter((favourite) => favourite.movie_id !== movie.movie_id);
+        setFavourites(newFavouriteList)
+
+        await fetch('http://localhost:1999/watchedMovies/remove', {
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                user_id: userId,
-                movie_id: movie.imdbID,
-                Title: movie.Title,
-                Poster: movie.Poster,
+                user_id: String(userId),
+                movie_id: movie.movie_id,
             }),
         });
     };
-    
+
 
     return (
         <div className="container-fluid movie-app">

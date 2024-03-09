@@ -26,22 +26,21 @@ router.post('/add', async (req, res) => {
 
 // Rota para remover um filme assistido
 router.delete('/remove', async (req, res) => {
-  try {
-    const { user_id, movie_id } = req.body;
+    try {
+        const { user_id, movie_id } = req.body;
 
-    const existingWatchedMovie = await WatchedMovie.findOneAndDelete({ user_id, movie_id });
+        const existingWatchedMovie = await WatchedMovie.findOneAndDelete({ user_id, movie_id });
 
-    if (!existingWatchedMovie) {
-      return res.status(404).json({ message: 'Filme assistido não encontrado.' });
+        if (!existingWatchedMovie) {
+            return res.status(404).json({ message: 'Filme assistido não encontrado.' });
+        }
+
+        res.status(200).json({ message: 'Filme assistido removido com sucesso.' });
+    } catch (error) {
+        console.error('Erro ao remover filme assistido:', error);
+        res.status(500).json({ message: 'Erro interno do servidor.' });
     }
-
-    res.status(200).json({ message: 'Filme assistido removido com sucesso.' });
-  } catch (error) {
-    console.error('Erro ao remover filme assistido:', error);
-    res.status(500).json({ message: 'Erro interno do servidor.' });
-  }
 });
-
 
 // Modifique a rota para aceitar o user_id como parâmetro
 router.get('/getByUserId/:user_id', async (req, res) => {
