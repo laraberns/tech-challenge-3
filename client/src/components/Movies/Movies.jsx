@@ -6,6 +6,7 @@ import MovieListHeading from "./MovieListHeading";
 import SearchBox from "./SearchBox";
 import AddWatched from "./AddWatched";
 import RemoveWatched from "./RemoveWatched";
+import RecommendMovie from "./RecommendMovie";
 
 const Movies = () => {
 
@@ -54,15 +55,15 @@ const Movies = () => {
     const addFavouriteMovie = async (movie) => {
         // Check if the movie is already in the favourites list
         const isAlreadyAdded = favourites.some((favourite) => favourite.imdbID === movie.imdbID);
-    
+
         if (isAlreadyAdded) {
             console.warn('This movie is already in your watched list.');
             return;
         }
-    
+
         const newFavouriteList = [...favourites, movie];
         setFavourites(newFavouriteList);
-    
+
         // Modifique o corpo da requisição para incluir foto e nome do filme
         await fetch('http://localhost:1999/watchedMovies/add', {
             method: 'POST',
@@ -77,7 +78,7 @@ const Movies = () => {
             }),
         });
     };
-    
+
 
     const RemoveFavouriteMovie = async (movie) => {
         const newFavouriteList = favourites.filter((favourite) => favourite.movie_id !== movie.movie_id);
@@ -127,6 +128,12 @@ const Movies = () => {
                         </div>
                     </>
                 )}
+            </div>
+            <div className="row d-flex align-items-center mt-4 mb-3">
+                <MovieListHeading heading="Indique um filme" />
+                <div className="row">
+                    <RecommendMovie movies={movies}/>
+                </div>
             </div>
         </div>
     );

@@ -27,7 +27,7 @@ function Home() {
   return (
     <div className="d-flex flex-column align-items-center">
       <Movies />
-      <button onClick={handleLogout} className="btn btn-danger">Sair</button>
+       <button onClick={handleLogout} className="btn btn-danger ml-auto">Sair</button>
     </div>
   )
 }
