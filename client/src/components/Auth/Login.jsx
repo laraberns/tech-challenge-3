@@ -5,29 +5,33 @@ import './authStyles.css'
 import { MdEmail, MdPassword } from "react-icons/md";
 
 function Login() {
-
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
     const navigate = useNavigate()
 
     Axios.defaults.withCredentials = true
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        // Sending a POST request to the server with user information
         Axios.post("http://localhost:1999/auth/login", {
             email,
             password
-        })
-            .then(response => {
-                if (response.data.status) {
-                    alert(response.data.message);
-                    navigate('/')
-                } else {
-                    alert(response.data.message);
-                }
-            }).catch(error => alert(error))
+        }).then(response => {
+            if (response.data.status) {
+                alert(response.data.message);
+                const userId = response.data.user_id;
+
+                // Salvando user_id no localStorage
+                localStorage.setItem('user_id', userId);
+
+                // Navegando para a rota '/'
+                navigate('/');
+            } else {
+                alert(response.data.message);
+            }
+        }).catch(error => alert(error))
     }
+
 
     return (
         <div className="grid">

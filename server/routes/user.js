@@ -37,24 +37,32 @@ router.post("/signup", async (req, res) => {
 
 // Route for user login
 router.post("/login", async (req, res) => {
-    const { email, password } = req.body
+    const { email, password } = req.body;
 
-    const user = await User.findOne({ email })
-    if (!user) {
-        return res.json({ message: 'Usuário não cadastrado' })
+    try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.json({ status: false, message: 'Usuário não cadastrado' });
+        }
+
+        const validPassword = await bcrypt.compare(password, user.password);
+
+        if (!validPassword) {
+            return res.json({ status: false, message: "Senha incorreta!" });
+        }
+
+        const token = jwt.sign({ username: user.username }, process.env.KEY, { expiresIn: '1h' });
+        res.cookie('token', token, { httpOnly: true, maxAge: 360000 });
+
+        // Inclua o ID do usuário no objeto de retorno
+        return res.json({ status: true, message: "Login com sucesso", user_id: user._id });
+    } catch (error) {
+        // Lide com erros (por exemplo, erro no banco de dados)
+        console.error(error);
+        return res.status(500).json({ status: false, message: "Erro durante o login" });
     }
-
-    const validPassword = await bcrypt.compare(password, user.password)
-
-    if (!validPassword) {
-        return res.json({ message: "Senha incorreta!" })
-    }
-
-    const token = jwt.sign({ username: user.username }, process.env.KEY, { expiresIn: '1h' })
-    res.cookie('token', token, { httpOnly: true, maxAge: 360000 })
-
-    return res.json({ status: true, message: "Login com sucesso" })
-})
+});
 
 
 // Route for user Forgot Password
