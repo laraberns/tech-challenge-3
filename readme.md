@@ -59,4 +59,5 @@
 
 
 ## Rotas da API (/movies)
-- **/getAll**: Retorna todos os filmes da API. Para o banco de dados dos filmes, mockei a API para o MongoDB: https://github.com/toedter/movies-demo/blob/master/backend/src/main/resources/static/movie-data/movies-250.json
+- **/getAll**: Retorna todos os filmes da API. Os dados dos filmes são mockados e armazenados no MongoDB. O esquema de dados pode ser encontrado [aqui](https://github.com/toedter/movies-demo/blob/master/backend/src/main/resources/static/movie-data/movies-250.json).
+
