@@ -4,10 +4,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Movies.css';
 import MovieListHeading from "./MovieListHeading";
 import SearchBox from "./SearchBox";
+import AddWatched from "./AddWatched";
+import RemoveWatched from "./RemoveWatched";
 
 function Movies() {
     const [movies, setMovies] = useState([]);
     const [search, setSearch] = useState('');
+    const [favourites, setFavourites] = useState([]);
 
     const getMovieRequests = async () => {
         const url = 'http://localhost:1999/movies/getAll';
@@ -30,16 +33,41 @@ function Movies() {
         getMovieRequests();
     }, [search]);
 
+    const addFavouriteMovie = (movie) => {
+        const newFavouriteList = [...favourites, movie];
+        setFavourites(newFavouriteList);
+    };
+
+    const RemoveFavouriteMovie = (movie) => {
+        const newFavouriteList = favourites.filter((favourite) => favourite.imdbID != movie.imdbID )
+        setFavourites(newFavouriteList);
+    };
+
     return (
         <div className="container-fluid movie-app">
             <div className="row d-flex align-items-center mt-4 mb-3">
                 <MovieListHeading heading="Filmes" />
                 <SearchBox
-                    search={search} setSearch={setSearch}
+                    search={search}
+                    setSearch={setSearch}
                 />
             </div>
             <div className="row">
-                <MoviesList movies={movies} />
+                <MoviesList
+                    movies={movies}
+                    watchedComponent={AddWatched}
+                    handleFavouritesClick={addFavouriteMovie}
+                />
+            </div>
+            <div className="row d-flex align-items-center mt-4 mb-3">
+                <MovieListHeading heading="Assistidos" />
+            </div>
+            <div className="row">
+                <MoviesList
+                    movies={favourites}
+                    watchedComponent={RemoveWatched}
+                    handleFavouritesClick={RemoveFavouriteMovie}
+                />
             </div>
         </div>
     );
