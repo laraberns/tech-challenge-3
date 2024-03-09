@@ -60,15 +60,21 @@ function Movies() {
                 />
             </div>
             <div className="row d-flex align-items-center mt-4 mb-3">
-                <MovieListHeading heading="Assistidos" />
-            </div>
-            <div className="row">
-                <MoviesList
-                    movies={favourites}
-                    watchedComponent={RemoveWatched}
-                    handleFavouritesClick={RemoveFavouriteMovie}
-                />
-            </div>
+            {favourites.length > 0 && (
+                <>
+                    <div className="row d-flex align-items-center mt-4 mb-3">
+                        <MovieListHeading heading="Assistidos" />
+                    </div>
+                    <div className="row">
+                        <MoviesList
+                            movies={favourites}
+                            watchedComponent={RemoveWatched}
+                            handleFavouritesClick={RemoveFavouriteMovie}
+                        />
+                    </div>
+                </>
+            )}
+        </div>
         </div>
     );
 }

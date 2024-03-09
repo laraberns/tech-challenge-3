@@ -4,22 +4,17 @@ body {
     margin: 0;
 }
 
-.movie-app {
-    overflow: hidden;
-}
-
-.movie-app .row {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-}
-
 .image-container {
     position: relative;
     transition: transform 0.2s;
 }
 
+.image-container img{
+    height: 350px;
+    margin-bottom: 1.5rem;
+}
+
 .image-container:hover {
-    cursor: pointer;
     transform: scale(0.9);
 }
 
@@ -38,3 +33,28 @@ body {
 	padding: 20px;
 	text-align: center;
 }
+
+.titulo-filme-card{
+    font-weight: 700;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem 0 1rem;
+    background-color: #eeeeee;
+    border-radius: 30px;
+  }
+  
+  .content-box {
+    max-width: 87vw;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .movie-app{
+    width: 90vw;
+  }
