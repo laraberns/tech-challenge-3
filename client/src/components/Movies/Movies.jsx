@@ -52,12 +52,15 @@ const Movies = () => {
     }, [search]);
 
 
+   // console.log(favourites);
+
     const addFavouriteMovie = async (movie) => {
         // Check if the movie is already in the favourites list
-        const isAlreadyAdded = favourites.some((favourite) => favourite.imdbID === movie.imdbID);
+        const isAlreadyAdded = await favourites.some((favourite) => favourite.Title === movie.Title);
+       
 
         if (isAlreadyAdded) {
-            console.warn('This movie is already in your watched list.');
+            alert('Esse filme já está na sua lista de assistidos.');
             return;
         }
 
@@ -81,7 +84,7 @@ const Movies = () => {
 
 
     const RemoveFavouriteMovie = async (movie) => {
-        const newFavouriteList = favourites.filter((favourite) => favourite.movie_id !== movie.movie_id);
+        const newFavouriteList = await favourites.filter((favourite) => favourite.movie_id !== movie.movie_id);
         setFavourites(newFavouriteList)
 
         await fetch('http://localhost:1999/watchedMovies/remove', {
