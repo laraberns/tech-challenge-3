@@ -21,9 +21,9 @@ O MovieFlix Plus é um site desenvolvido utilizando as tecnologias React, Node.j
 
 ## Banco de Dados
 - 3 bancos de dados:
-  - db1: Dados de autenticação
-  - db2: Banco de dados de filmes
-  - db3: Banco de dados de filmes assistidos por usuário
+  - **db1**: Banco de dados de autenticação.
+  - **db2**: Banco de dados de filmes.
+  - **db3**: Banco de dados de filmes assistidos por usuário.
 
 ### Gerenciamento do Banco de Dados
 - **MongoDB**: MongoDB é o banco de dados NoSQL escolhido, proporcionando flexibilidade e escalabilidade para armazenar dados relacionados a usuários.
@@ -76,3 +76,56 @@ O MovieFlix Plus é um site desenvolvido utilizando as tecnologias React, Node.j
 
 ## Rotas da API (/google)
 - **/addRow**: Rota para adicionar um filme sugerido pelo usuário na planilha Google Sheets para que os administradores possam validar se o filme existe e adicionar no catálogo.
+
+## Rodando o Projeto
+Para experimentar o projeto MovieFlix Plus, siga estas instruções:
+
+1) Pré-requisitos:
+- Instale o Node.js: Certifique-se de ter o Node.js instalado em sua máquina. Você pode baixá-lo aqui.
+- Instale o MongoDB: Instale o MongoDB em sua máquina e certifique-se de que esteja em execução. Você pode baixá-lo aqui.
+- Configure a API do Google Sheets: Siga o Guia de Início Rápido da API do Google Sheets para ativar a API do Google Sheets e baixar o arquivo credentials.json. Salve este arquivo no diretório raiz do projeto.
+
+2) Clone o repositório do MovieFlix Plus:
+git clone [<repository_url>](https://github.com/laraberns/tech-challenge-3.git)
+
+3) Instale as dependências para o frontend e o backend:
+~~~
+# Navegue até o diretório do frontend
+    cd frontend
+    npm install
+
+# Navegue até o diretório do backend
+    cd backend
+    npm install
+~~~
+
+4) Variáveis de Ambiente
+~~~
+# Crie um arquivo .env no diretório backend com a configuração fornecida:
+    MONGODBCONNECTION='mongodb://localhost:27017/authentication'
+    MONGODBCONNECTIONMOVIES='mongodb://localhost:27017/movies'
+    MONGODBCONNECTIONWATCHEDMOVIES='mongodb://localhost:27017/watchedmovies'
+    KEY='yourkey'
+    EMAIL='youremail'
+    SENHAEMAIL1='yourpassword'
+~~~
+
+5) Executar o Projeto
+~~~
+Inicie o servidor backend:
+    # Navegue até o diretório do backend
+    cd backend
+    # Execute o servidor
+    npm start
+
+Inicie o servidor frontend em um novo terminal:
+    # Navegue até o diretório do frontend
+    cd frontend
+    # Execute o servidor
+    npm run dev
+~~~
+
+6) Abra seu navegador e vá para http://localhost:5173 para acessar a aplicação MovieFlix Plus.
+
+**Agora você pode explorar os recursos do MovieFlix Plus, incluindo autenticação de usuário, listagem de filmes, marcação de filmes como assistidos, sugestão de filmes e muito mais. Crie as suas credenciais para testar a autenticação e siga o fluxo da aplicação com base nos recursos descritos no documento Tech Challenge.**
+
