@@ -52,19 +52,27 @@ const Movies = () => {
     }, [search]);
 
 
-   // console.log(favourites);
+    // console.log(favourites);
 
     const addFavouriteMovie = async (movie) => {
         // Check if the movie is already in the favourites list
         const isAlreadyAdded = await favourites.some((favourite) => favourite.Title === movie.Title);
-       
 
         if (isAlreadyAdded) {
             alert('Esse filme já está na sua lista de assistidos.');
             return;
         }
 
-        const newFavouriteList = [...favourites, movie];
+        // Create a new object with desired properties
+        const newFavourite = {
+            user_id: String(userId),
+            movie_id: movie.imdbID,
+            Title: movie.Title,
+            Poster: movie.Poster,
+        };
+
+        // Update state with the new object
+        const newFavouriteList = [...favourites, newFavourite];
         setFavourites(newFavouriteList);
 
         // Modifique o corpo da requisição para incluir foto e nome do filme
@@ -135,7 +143,7 @@ const Movies = () => {
             <div className="row d-flex align-items-center mt-4 mb-3">
                 <MovieListHeading heading="Indique um filme" />
                 <div className="row">
-                    <RecommendMovie movies={movies}/>
+                    <RecommendMovie movies={movies} />
                 </div>
             </div>
         </div>
