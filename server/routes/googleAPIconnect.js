@@ -1,6 +1,6 @@
 // Route file
 import express from 'express';
-import { connectToGoogleAPI, addRowToGoogleSheet } from '../models/GoogleAPIConnect.js';
+import {addRowToGoogleSheet } from '../models/GoogleAPIConnect.js';
 
 const router = express.Router();
 
