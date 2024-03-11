@@ -3,7 +3,7 @@ import { useState } from "react";
 function RecommendMovie(props) {
     const [inputValue, setInputValue] = useState('');
 
-    const handleRecommendClick = () => {
+    const handleRecommendClick = async() => {
         // Check if the recommended movie already exists in the list
         const movieExists = props.movies.some(movie => movie.Title.toLowerCase() === inputValue.toLowerCase());
 
@@ -11,8 +11,30 @@ function RecommendMovie(props) {
             alert(`O filme "${inputValue}" já existe na base de dados.`);
         } else {
             alert(`${inputValue} : Recomendado`);
+            try {
+                const response = await fetch('http://localhost:1999/google/addRow', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        filme_recomendado: inputValue,
+                    }),
+                });
+
+                if (response.ok) {
+                    alert(`${inputValue} : Recomendado`);
+                } else {
+                    const data = await response.json();
+                    alert(`Erro ao recomendar o filme: ${data.error}`);
+                }
+            } catch (error) {
+                console.error('Error posting recommendation:', error.message);
+                alert('Erro ao recomendar o filme. Verifique o console para detalhes.');
+            }
         }
-    };
+        }
+    ;
 
     return (
         <div className="col col-sm-4 d-flex mt-2">

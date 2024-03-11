@@ -1,11 +1,12 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { connectToDatabases} from './db.js';
+import { connectToDatabases } from './db.js';
 import { UserRouter } from './routes/user.js';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { MovieRouter } from './routes/movies.js';
 import { WatchedRouter } from './routes/watchedMovies.js';
+import { GoogleRouter } from './routes/googleAPIconnect.js';
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use('/auth', UserRouter);
 app.use('/movies', MovieRouter);
 app.use('/watchedMovies', WatchedRouter);
+app.use('/google', GoogleRouter)
 
 // Call the function to connect to databases
 connectToDatabases();
